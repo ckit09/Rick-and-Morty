@@ -1,0 +1,15 @@
+.contactWrapper{
+  text-align: center;
+  padding-right: 20px;
+}
+.contactWrapper > h3{
+  margin-top: 30px;
+  font-size: 25px;
+  color:black;
+  cursor: pointer;
+
+}
+
+.contactTitle:hover{
+  background-color: #2e2f33a4;
+}
