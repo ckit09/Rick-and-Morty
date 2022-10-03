@@ -1,15 +1,10 @@
 import "./info.css";
-import { useEffect } from "react";
 
 const Info = ({
   selectedItemId,
   hasCharacter,
   character,
-  episodes,
 }) => {
-  console.log("episodes:", episodes);
-
-
   return (
     <div className="info">
       <div className="header">

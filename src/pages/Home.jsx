@@ -6,14 +6,14 @@ import { useState, useEffect } from "react";
 
 function Home() {
   const [selectedItemId, setSelectedItemId] = useState();
-  const [character, setCharacter] = useState();
+  const [character, setCharacter] = useState([]);
   var result;
-  var epNumbers = [];
-  var episodes = [];
+  var epIds = [];
+  var episodeInfos = [];
   var hasCharacter = false;
   const infoEpDetails = document.querySelector(".infoEpDetails");
 
-  const getEpisodes = async (eps) => {
+  const getEpisodeInfos = async (eps) => {
     //call episode api
     await eps.map(async (ep) => {
       const res = await fetch(`https://rickandmortyapi.com/api/episode/${ep}`);
@@ -22,7 +22,7 @@ function Home() {
         throw new console.error(res.status);
       }
       const result = await res.json();
-      episodes[ep] = result;
+      episodeInfos[ep] = result;
 
       const tr = document.createElement("tr");
       const tdName = document.createElement("td");
@@ -30,10 +30,10 @@ function Home() {
       const tdEpisode = document.createElement("td");
       const tdCreatedDate = document.createElement("td");
 
-      tdName.append(episodes[ep].name);
-      tdAirDate.append(episodes[ep].air_date);
-      tdEpisode.append(episodes[ep].episode);
-      tdCreatedDate.append(new Date(episodes[ep].created).toString());
+      tdName.append(episodeInfos[ep].name);
+      tdAirDate.append(episodeInfos[ep].air_date);
+      tdEpisode.append(episodeInfos[ep].episode);
+      tdCreatedDate.append(new Date(episodeInfos[ep].created).toString());
       tr.append(tdName);
       tr.append(tdAirDate);
       tr.append(tdEpisode);
@@ -41,21 +41,21 @@ function Home() {
 
       infoEpDetails.append(tr);
     });
+    console.log("episodeInfos:", episodeInfos);
   };
 
   if (selectedItemId >= 0) {
     hasCharacter = true;
     //retrieve episode list from character to call episode api
-    epNumbers = character[selectedItemId].episode.map((ep) =>
+    epIds = character[selectedItemId].episode.map((ep) =>
       ep.split("/").pop().trim()
     );
-    console.log("epNumbers:", epNumbers);
     infoEpDetails.textContent = "";
-    getEpisodes(epNumbers);
+    getEpisodeInfos(epIds);
   }
 
-  const getCharacter = async (characterPage) => {
-    const res = await fetch(characterPage);
+  const getCharacter = async (page) => {
+    const res = await fetch(page);
 
     if (!res.ok) {
       throw new console.error(res.status);
@@ -63,13 +63,12 @@ function Home() {
     result = await res.json();
     
     setCharacter(result.results);
-    
     console.log("result:", result.results);
   };
 
   useEffect(() => {
     //call character api
-    var characterPage = "https://rickandmortyapi.com/api/character/?page=1";
+    const characterPage = "https://rickandmortyapi.com/api/character/?page=1";
     getCharacter(characterPage);
   }, []);
 
@@ -101,7 +100,7 @@ function Home() {
             selectedItemId={selectedItemId}
             hasCharacter={hasCharacter}
             character={character}
-            episodes={episodes}
+            episodeInfos={episodeInfos}
           />
         </div>
       </div>
