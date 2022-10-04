@@ -5,6 +5,52 @@ const Info = ({
   hasCharacter,
   character,
 }) => {
+  var epIds = [];
+  var episodeInfos = [];
+  const infoEpDetails = document.querySelector(".infoEpDetails");
+
+  const getEpisodeInfos = async (eps) => {
+    //call episode api
+    await eps.map(async (ep) => {
+      const res = await fetch(`https://rickandmortyapi.com/api/episode/${ep}`);
+
+      if (!res.ok) {
+        throw new console.error(res.status);
+      }
+      const result = await res.json();
+      episodeInfos[ep] = result;
+
+      const tr = document.createElement("tr");
+      const tdName = document.createElement("td");
+      const tdAirDate = document.createElement("td");
+      const tdEpisode = document.createElement("td");
+      const tdCreatedDate = document.createElement("td");
+
+      tdName.append(episodeInfos[ep].name);
+      tdAirDate.append(episodeInfos[ep].air_date);
+      tdEpisode.append(episodeInfos[ep].episode);
+      tdCreatedDate.append(new Date(episodeInfos[ep].created).toString());
+      tr.append(tdName);
+      tr.append(tdAirDate);
+      tr.append(tdEpisode);
+      tr.append(tdCreatedDate);
+
+      infoEpDetails.append(tr);
+    });
+    console.log("episodeInfos:", episodeInfos);
+  };
+
+  if (selectedItemId >= 0) {
+    hasCharacter = true;
+    //retrieve episode list from character to call episode api
+    console.log('episode:',character[selectedItemId].episode);
+    epIds = character[selectedItemId].episode.map((ep) =>
+      ep.split("/").pop().trim()
+    );
+    infoEpDetails.textContent = "";
+    getEpisodeInfos(epIds);
+  }
+
   return (
     <div className="info">
       <div className="header">
