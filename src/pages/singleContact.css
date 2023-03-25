@@ -10,8 +10,8 @@
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  height: 50vh;
+  width: 70vw;
+  height: 70vh;
   padding: 20px;
   background-color: #1c1e22bb;
   border-radius: 30px;
@@ -20,8 +20,8 @@
 
 .contactInput {
   margin-top: 15px;
-  margin-bottom: 10px;
-  height: 30px;
+  margin-bottom: 20px;
+  height: 5%;
   padding: 10px;
   font-size: 20px;
   border-radius: 10px;
@@ -29,21 +29,19 @@
 
 .contactOption {
   display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
 }
 .contactOption > select {
   border-radius: 10px;
-  height: 30px;
+  height: 200%;
   width: 50%;
-}
-
-.contactButtons{
-  margin-top: 30px;
 }
 
 .contactSubmit{
   margin-bottom: 10px;
   width: 100%;
-  height: 30px;
+  height: 5%;
   border-radius: 10px;
   border: 0px;
   background-color: rgb(126, 165, 250);
@@ -55,9 +53,9 @@
 }
 
 .contactReset{
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   width: 100%;
-  height: 30px;
+  height: 5%;
   border-radius: 10px;
   border: 0px;
   background-color: #ffffff;
@@ -65,4 +63,35 @@
 }
 .contactReset:hover{
   background-color: gray;
+}
+
+.contactSearchResult {
+  height: 55%;
+  overflow: scroll;
+}
+
+.singleContact-itemList {
+  display: flex;
+  flex-direction: row;
+}
+
+.singleContact-content {
+  width: 25%;
+  height: fit-content;
+  color: white;
+}
+
+.errMsg {
+  font-size: 30px;
+  color:red;
+  font-weight: bold;
+}
+
+.contactSearchResult::-webkit-scrollbar {
+  width: 5px;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
 }
