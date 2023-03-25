@@ -17,20 +17,20 @@ function Home() {
       throw new console.error(res.status);
     }
     result = await res.json();
-    
-      // setCharacter(result.results)
-    await setCharacter(prevCharacter => {
-        return [...new Set([...prevCharacter, ...result.results.map(c => c)])]
-    })
 
-    console.log("result:", result.results)
-    console.log('character:',character);
+    // setCharacter(result.results)
+    await setCharacter((prevCharacter) => {
+      return [...new Set([...prevCharacter, ...result.results.map(c=>c) ])];
+    });
+
+    console.log("result:", result.results);
+    console.log("character:", character);
   };
 
   useEffect(() => {
     //call character api
     const characterPage = "https://rickandmortyapi.com/api/character/?page=1";
-    getCharacter(characterPage)
+    getCharacter(characterPage);
   }, []);
 
   useEffect(() => {
@@ -38,10 +38,11 @@ function Home() {
     const itemList = document.querySelector(".itemList");
 
     function handleScroll() {
-      if (itemList.scrollTop + itemList.clientHeight  === itemList.scrollHeight) {
-        getCharacter(result.info.next).then(
-          console.log('next page')
-        )
+      if (
+        itemList.scrollTop + itemList.clientHeight ===
+        itemList.scrollHeight
+      ) {
+        getCharacter(result.info.next).then(console.log("next page"));
       }
     }
     itemList.addEventListener("scroll", handleScroll);
