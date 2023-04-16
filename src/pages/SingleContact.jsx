@@ -61,7 +61,7 @@ const SingleContact = () => {
   return (
     <div className="singleContact">
       <div className="contactContainer">
-        <h1>Contact</h1>
+        <h1>Single Enquiry</h1>
         <input
           autoFocus
           className="contactInput"

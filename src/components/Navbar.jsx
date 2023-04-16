@@ -6,9 +6,12 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <h1>Rick and Morty</h1>
+      <div className="contactWrapper">
+          <h3 className="contactTitle">Home Page</h3>
+      </div>
       <Link to="/contact">
         <div className="contactWrapper">
-          <h3 className="contactTitle">Contact</h3>
+          <h3 className="contactTitle">Single Query Page</h3>
         </div>
       </Link>
     </div>
