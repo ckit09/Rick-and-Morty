@@ -35,8 +35,8 @@ const SingleContact = () => {
     let status = document.querySelector(".contactStatus").value.toLowerCase();
     let gender = document.querySelector(".contactGender").value.toLowerCase();
     query.name = `name=${name}`;
-    (status !== "false") ? (query.status = `&status=${status}`) : (query.status = "");
-    (gender !== "false") ? (query.gender = `&gender=${gender}`) : (query.gender = "");
+    query.status = status !== "false" ? (query.status = `&status=${status}`) : (query.status = "");
+    query.gender = gender !== "false" ? (query.gender = `&gender=${gender}`) : (query.gender = "");
     console.log(query);
 
     if (!name) {
